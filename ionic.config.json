@@ -1,0 +1,7 @@
+{
+  "name": "ionic-push-notification-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
