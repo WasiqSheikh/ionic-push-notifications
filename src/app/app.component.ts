@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
+import { Platform } from '@ionic/angular';
+import { OnesignalService } from './services/oneSignal/one-signal.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,14 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+
+  private oneSignalService = inject(OnesignalService);
+  private platform = inject(Platform);
+  constructor() {
+    this.platform.ready().then(() => {
+      if (Capacitor.getPlatform() != 'web') {
+        this.oneSignalService.OneSignalInit();
+      }
+    })
+  }
 }
